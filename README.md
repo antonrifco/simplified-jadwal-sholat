@@ -4,4 +4,5 @@ we crawl to an http API, then run cron every minute to check whether it's alread
 
 
 Add this entry to your crontab (using `crontab -e` command)
+
 */1 * * * * sh <path to script>/sholat.sh

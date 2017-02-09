@@ -17,7 +17,6 @@ else
 fi
 
 i=`echo $a | jq .items[0].isha| sed s/\"//g`
-now=`TZ=":Asia/Jakarta" date +"%l:%M %P"`
 
 if [ "$i" = "$now" ]; then
     curl -d '{"text": "@here bos isya boss"}' https://hooks.slack.com/services/<xxxx>/<xxxx>/<xxxx>
@@ -27,7 +26,6 @@ else
 fi
 
 ash=`echo $a | jq .items[0].asr| sed s/\"//g`
-now=`TZ=":Asia/Jakarta" date +"%l:%M %P"`
 
 if [ "$ash" = "$now" ]; then
     curl -d '{"text": "@here bos ashar boss"}' https://hooks.slack.com/services/<xxxx>/<xxxx>/<xxxx>
@@ -37,7 +35,6 @@ else
 fi
 
 dhuhr=`echo $a | jq .items[0].dhuhr| sed s/\"//g`
-now=`TZ=":Asia/Jakarta" date +"%l:%M %P"`
 
 if [ "$dhuhr" = "$now" ]; then
     curl -d '{"text": "@here bos dhuhr boss"}' https://hooks.slack.com/services/<xxxx>/<xxxx>/<xxxx>

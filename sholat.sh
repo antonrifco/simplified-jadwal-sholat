@@ -1,46 +1,45 @@
 #!/bin/bash
 
-## change this url to your kecamatan
 a=`curl http://muslimsalat.com/kebonjeruk.json`
 
 sleep 1
-
-m=`echo $a | jq .items[0].maghrib| sed s/\"//g`
-## change this to your timezone
-now=`TZ=":Asia/Jakarta" date +"%l:%M %P"`
+echo "---------------------------------------" >> ~/bots/jadwalsholat/schedule.log
+m=`echo $a | jq .items[0].maghrib| sed s/\"//g | sed 's. ..g'`
+now=`TZ=":Asia/Jakarta" date +"%l:%M %P" --date '+15 min' | sed 's. ..g'`
 
 if [ "$m" = "$now" ]; then
-    curl -d '{"text": "<!here|here> bos, magrib boss"}' https://hooks.slack.com/services/<xxxx>/<xxxx>/<xxxx>
-    echo "run announcer for magrib"
+    curl -d '{"text": "<!here|bos2semua> Halo, 15 menit lagi magrib. Ayo siap2 ke Masjid"}' https://hooks.slack.com/services/xxxxxx/xxxxxx/xxxxxxxx
+    echo "sending magrib" >> ~/bots/jadwalsholat/schedule.log
 else
-    echo "not run announcer for magrib"
+    echo "not sending magrib ("$m" != *"$now")" >> ~/bots/jadwalsholat/schedule.log
 fi
 
-i=`echo $a | jq .items[0].isha| sed s/\"//g`
+i=`echo $a | jq .items[0].isha| sed s/\"//g | sed 's. ..g'`
+now=`TZ=":Asia/Jakarta" date +"%l:%M %P" --date '+15 min' | sed 's. ..g'`
 
 if [ "$i" = "$now" ]; then
-    curl -d '{"text": "<!here|here> bos, isya boss"}' https://hooks.slack.com/services/<xxxx>/<xxxx>/<xxxx>
-    echo "run announcer for isya"
+    curl -d '{"text": "<!here|bos2semua> Halo, 15 menit lagi isya. Ayo siap2 ke Masjid"}' https://hooks.slack.com/services/xxxxxx/xxxxxx/xxxxxxxx
+    echo "sending isyak" >> ~/bots/jadwalsholat/schedule.log
 else
-    echo "not run announcer for isya"
+    echo "not sending isyak ("$i" != *"$now")" >> ~/bots/jadwalsholat/schedule.log
 fi
 
-ash=`echo $a | jq .items[0].asr| sed s/\"//g`
+ash=`echo $a | jq .items[0].asr| sed s/\"//g | sed 's. ..g'`
+now=`TZ=":Asia/Jakarta" date +"%l:%M %P" --date '+15 min' | sed 's. ..g'`
 
 if [ "$ash" = "$now" ]; then
-    curl -d '{"text": "<!here|here> bos, ashar boss"}' https://hooks.slack.com/services/<xxxx>/<xxxx>/<xxxx>
-    echo "run announcer for ashar"
+    curl -d '{"text": "<!here|bos2semua> Halo, 15 menit lagi ashar. Ayo siap2 ke Masjid"}' https://hooks.slack.com/services/xxxxxx/xxxxxx/xxxxxxxx
+    echo "sending ashar">> ~/bots/jadwalsholat/schedule.log
 else
-    echo "not run announcer for ashar"
+    echo "not sending ashar ("$ash" != *"$now")" >> ~/bots/jadwalsholat/schedule.log
 fi
 
-dhuhr=`echo $a | jq .items[0].dhuhr| sed s/\"//g`
+dhuhr=`echo $a | jq .items[0].dhuhr| sed s/\"//g | sed 's. ..g'`
+now=`TZ=":Asia/Jakarta" date +"%l:%M %P" --date '+15 min' | sed 's. ..g'`
 
 if [ "$dhuhr" = "$now" ]; then
-    curl -d '{"text": "<!here|here> bos, dhuhr boss"}' https://hooks.slack.com/services/<xxxx>/<xxxx>/<xxxx>
-    echo "run announcer for dhuhr"
+    curl -d '{"text": "<!here|bos2semua> Halo, 15 menit lagi dhuhr. Ayo siap2 ke Masjid"}' https://hooks.slack.com/services/xxxxxx/xxxxxx/xxxxxxxx
+    echo "sending dhuhr"> ~/bots/jadwalsholat/schedule.log
 else
-    echo "not run announcer for dhuhr"
+    echo "not sending dhuhr ("$dhuhr" != *"$now")" >> ~/bots/jadwalsholat/schedule.log
 fi
-
-
